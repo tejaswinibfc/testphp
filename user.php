@@ -129,15 +129,15 @@ class Users
     public function login_user()
     {
         $email = $this->conn->real_escape_string($_POST['email']);
-        $password = $this->conn->real_escape_string($_POST['password']);
-
+        $password = $this->conn->real_escape_string(md5($_POST['password']));
         $sql = "SELECT * FROM customers where email='$email' and password='$password'";
-        $check_data = $this->conn->query($sql);
-        if ($check_data->num_rows > 0) {
-            $_SESSION["email"] = $email;
-            header("location: page1.php");
+        $result = $this->conn->query($sql);
+        echo $result->num_rows;die;
+        if ($result->num_rows > 0) {
+            echo "djhasjdha";die;
+
         } else {
-            echo "error ";
+            echo "0 results";
         }
     }
 
